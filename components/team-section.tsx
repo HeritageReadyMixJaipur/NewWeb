@@ -45,7 +45,7 @@ const founders = [
   },
   {
     id: 4,
-    name: 'Pavan Kumar Sharma',
+    name: 'Pawan Kumar Sharma',
     position: 'Co-Founder & Director',
     email: 'sunita@heritagereadymix.com',
     instagram: '@sunita_heritage',
@@ -56,7 +56,7 @@ const founders = [
   },
   {
     id: 5,
-    name: 'Ajamal Khan',
+    name: 'Ajmal Khan',
     position: 'Co-Founder & Director',
     email: 'sunita@heritagereadymix.com',
     instagram: '@sunita_heritage',
