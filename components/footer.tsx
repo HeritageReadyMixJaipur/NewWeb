@@ -111,7 +111,7 @@ export default function Footer() {
           </div>
           <div className={styles.copyright}>
             <Link
-              href="https://ravi22110219.github.io/BidsukTechnoCreation/"
+              href="https://bidsuk.tech/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.termsLink}

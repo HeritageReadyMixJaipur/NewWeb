@@ -13,7 +13,7 @@
 .footerContent {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .logo img {
-  height: 70px;
+  height: 50px;
   width: auto;
 }
 
@@ -100,23 +100,15 @@
 
 .footerBottom {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(58, 70, 87);
-  padding-top: 1rem;
-
-  padding-bottom: 1rem;
+  padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .copyright {
   color: #bdc3c7;
   font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .terms {

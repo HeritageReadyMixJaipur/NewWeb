@@ -3,14 +3,22 @@
 import type React from 'react'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Send, CheckCircle, Loader } from 'lucide-react'
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  CheckCircle,
+  Loader,
+  AlertCircle,
+} from 'lucide-react'
 import { useLanguage } from '@/contexts/language-context'
-import { useOrders } from '@/contexts/orders-context'
-import styles from './contact-section.module.css'
+import { useContacts } from '@/contexts/contacts-context'
+import styles from './contact-form.module.css'
 
-export default function ContactSection() {
+export default function ContactForm() {
   const { t } = useLanguage()
-  const { addOrder } = useOrders()
+  const { submitContact } = useContacts()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,7 +27,7 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [submittedOrderId, setSubmittedOrderId] = useState('')
+  const [submittedContactId, setSubmittedContactId] = useState('')
   const [error, setError] = useState('')
 
   const handleInputChange = (
@@ -38,36 +46,15 @@ export default function ContactSection() {
     setError('')
 
     try {
-      // Determine priority based on message content
-      const priority =
-        formData.message.toLowerCase().includes('urgent') ||
-        formData.message.toLowerCase().includes('asap')
-          ? 'high'
-          : formData.message.toLowerCase().includes('commercial') ||
-              formData.message.toLowerCase().includes('industrial')
-            ? 'high'
-            : 'medium'
-
-      // Estimate value based on message content
-      let estimatedValue = 50000 // Default
-      if (formData.message.toLowerCase().includes('commercial'))
-        estimatedValue = 200000
-      if (formData.message.toLowerCase().includes('industrial'))
-        estimatedValue = 500000
-      if (formData.message.toLowerCase().includes('residential'))
-        estimatedValue = 100000
-
-      // Add order to Firebase
-      const orderId = await addOrder({
+      // Submit contact to Firebase (public access)
+      const contactId = await submitContact({
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         message: formData.message,
-        priority,
-        estimatedValue,
       })
 
-      setSubmittedOrderId(orderId)
+      setSubmittedContactId(contactId)
       setIsSubmitted(true)
       setIsSubmitting(false)
 
@@ -77,8 +64,8 @@ export default function ContactSection() {
         setFormData({ name: '', email: '', phone: '', message: '' })
       }, 5000)
     } catch (error: any) {
-      console.error('Error submitting order:', error)
-      setError(error.message || 'Failed to submit order. Please try again.')
+      console.error('Error submitting contact:', error)
+      setError(error.message || 'Failed to submit contact. Please try again.')
       setIsSubmitting(false)
     }
   }
@@ -92,10 +79,10 @@ export default function ContactSection() {
               <CheckCircle size={64} />
             </div>
             <h2>Thank You!</h2>
-            <p>Your message has been submitted successfully to Firebase.</p>
-            <div className={styles.orderDetails}>
+            <p>Your contact details have been submitted successfully.</p>
+            <div className={styles.contactDetails}>
               <p>
-                <strong>Order ID:</strong> {submittedOrderId}
+                <strong>Contact ID:</strong> {submittedContactId}
               </p>
               <p>
                 <strong>Name:</strong> {formData.name}
@@ -108,11 +95,15 @@ export default function ContactSection() {
                   <strong>Phone:</strong> {formData.phone}
                 </p>
               )}
+              <p>
+                <strong>Status:</strong>{' '}
+                <span className={styles.statusBadge}>Not Contacted</span>
+              </p>
             </div>
-            {/* <p className={styles.followUp}>
-              Your order is now stored in Firebase Firestore. Check the admin
-              dashboard to see real-time updates!
-            </p> */}
+            <p className={styles.followUp}>
+              Our team will contact you within 24 hours. Your inquiry is now in
+              our system and will be managed by our admin team.
+            </p>
             <button
               onClick={() => {
                 setIsSubmitted(false)
@@ -120,7 +111,7 @@ export default function ContactSection() {
               }}
               className={styles.newMessageButton}
             >
-              Send Another Message
+              Submit Another Inquiry
             </button>
           </div>
         </div>
@@ -133,10 +124,10 @@ export default function ContactSection() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>{t('contactUs')}</h1>
-          {/* <p className={styles.subtitle}>
-            Get in touch with us for all your concrete needs. Powered by
-            Firebase!
-          </p> */}
+          <p className={styles.subtitle}>
+            Get in touch with us for all your concrete needs. No login required
+            - just submit your details!
+          </p>
         </div>
 
         <div className={styles.content}>
@@ -169,28 +160,23 @@ export default function ContactSection() {
               </div>
               <div className={styles.infoContent}>
                 <h3>Address</h3>
-                <p>Goner Rd, near Bombay Hospital, Jagatpura</p>
+                <p>Near Bombay Hospital, Goner Road, Jagatpura</p>
                 <p>Jaipur, Rajasthan 302001</p>
                 <p>India</p>
               </div>
             </div>
-            {/* 
-            <div className={styles.firebaseCard}>
-              <div className={styles.firebaseIcon}>🔥</div>
-              <div className={styles.firebaseContent}>
-                <h3>Powered by Firebase</h3>
-                <p>Real-time database</p>
-                <p>Secure authentication</p>
-                <p>Cloud storage</p>
-              </div>
-            </div> */}
           </div>
 
           <div className={styles.contactForm}>
+            <div className={styles.formHeader}>
+              <h2>Contact Details Submission</h2>
+              <p>Submit your inquiry - our admin team will contact you soon!</p>
+            </div>
+
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={styles.label}>
-                  Name <span className={styles.required}>*</span>
+                  Full Name <span className={styles.required}>*</span>
                 </label>
                 <input
                   type="text"
@@ -207,7 +193,7 @@ export default function ContactSection() {
 
               <div className={styles.formGroup}>
                 <label htmlFor="email" className={styles.label}>
-                  Email <span className={styles.required}>*</span>
+                  Email Address <span className={styles.required}>*</span>
                 </label>
                 <input
                   type="email"
@@ -240,7 +226,8 @@ export default function ContactSection() {
 
               <div className={styles.formGroup}>
                 <label htmlFor="message" className={styles.label}>
-                  Message <span className={styles.required}>*</span>
+                  Message / Requirements{' '}
+                  <span className={styles.required}>*</span>
                 </label>
                 <textarea
                   id="message"
@@ -250,12 +237,17 @@ export default function ContactSection() {
                   required
                   rows={5}
                   className={styles.textarea}
-                  placeholder="Tell us about your concrete requirements..."
+                  placeholder="Tell us about your concrete requirements, project details, timeline, etc."
                   disabled={isSubmitting}
                 />
               </div>
 
-              {error && <div className={styles.error}>{error}</div>}
+              {error && (
+                <div className={styles.error}>
+                  <AlertCircle size={16} />
+                  {error}
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -265,12 +257,12 @@ export default function ContactSection() {
                 {isSubmitting ? (
                   <>
                     <Loader size={20} className={styles.spinner} />
-                    Saving to Firebase...
+                    Submitting to Firebase...
                   </>
                 ) : (
                   <>
                     <Send size={20} />
-                    Send Message
+                    Submit Contact Details
                   </>
                 )}
               </button>

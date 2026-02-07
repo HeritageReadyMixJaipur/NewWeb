@@ -99,11 +99,11 @@
   margin: 0.25rem 0;
 }
 
-.firebaseCard {
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+.securityCard {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -111,22 +111,22 @@
   transition: transform 0.3s ease;
 }
 
-.firebaseCard:hover {
+.securityCard:hover {
   transform: translateY(-5px);
 }
 
-.firebaseIcon {
+.securityIcon {
   font-size: 3rem;
   flex-shrink: 0;
 }
 
-.firebaseContent h3 {
+.securityContent h3 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.firebaseContent p {
+.securityContent p {
   margin: 0.25rem 0;
   opacity: 0.9;
 }
@@ -137,6 +137,25 @@
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.formHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.formHeader p {
+  color: #6b7280;
+  font-size: 0.95rem;
 }
 
 .form {
@@ -203,6 +222,9 @@
   border-radius: 8px;
   font-size: 0.9rem;
   border: 1px solid #fecaca;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .submitButton {
@@ -247,6 +269,20 @@
   }
 }
 
+.privacyNote {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.privacyNote p {
+  margin: 0;
+  color: #0369a1;
+  font-size: 0.9rem;
+}
+
 .successMessage {
   text-align: center;
   background: white;
@@ -278,7 +314,7 @@
   margin-bottom: 2rem;
 }
 
-.orderDetails {
+.contactDetails {
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
   border-radius: 12px;
@@ -287,13 +323,23 @@
   text-align: left;
 }
 
-.orderDetails p {
+.contactDetails p {
   margin: 0.5rem 0;
   color: #374151;
 }
 
-.orderDetails strong {
+.contactDetails strong {
   color: #1f2937;
+}
+
+.statusBadge {
+  background: #fbbf24;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .followUp {
@@ -346,6 +392,7 @@
   }
 }
 
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
@@ -357,12 +404,33 @@
   }
 
   .infoCard,
-  .firebaseCard {
+  .securityCard {
     padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .iconContainer,
+  .securityIcon {
+    margin-bottom: 1rem;
   }
 
   .contactForm {
     padding: 2rem;
+  }
+
+  .formHeader {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .input,
+  .textarea {
+    padding: 0.875rem 1rem;
+  }
+
+  .submitButton {
+    padding: 1rem 1.5rem;
   }
 
   .mapTitle {
@@ -386,18 +454,24 @@
 
   .input,
   .textarea {
-    padding: 0.875rem 1rem;
+    padding: 0.75rem;
   }
 
   .submitButton {
-    padding: 1rem 1.5rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
   }
 
   .successMessage {
     padding: 1.5rem;
   }
 
-  .orderDetails {
+  .contactDetails {
+    padding: 1rem;
+  }
+
+  .infoCard,
+  .securityCard {
     padding: 1rem;
   }
 }

@@ -1,0 +1,101 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding-top: 80px; /* Add space for fixed navbar */
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dashboardTabs {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.tabsContainer {
+  position: relative;
+}
+
+.tabsContainer input[type="radio"] {
+  display: none;
+}
+
+.tabLabel {
+  display: inline-block;
+  padding: 20px 30px;
+  background: #f8fafc;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+
+.tabLabel:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.tabsContainer input[type="radio"]:checked + .tabLabel {
+  background: white;
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+.tabContent {
+  position: relative;
+}
+
+.tabPane {
+  display: none;
+  padding: 0;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tabsContainer input[type="radio"]:nth-of-type(1):checked ~ .tabContent .tabPane:nth-child(1),
+.tabsContainer input[type="radio"]:nth-of-type(2):checked ~ .tabContent .tabPane:nth-child(2),
+.tabsContainer input[type="radio"]:nth-of-type(3):checked ~ .tabContent .tabPane:nth-child(3) {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .dashboard {
+    padding-top: 70px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .tabLabel {
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabLabel {
+    display: block;
+    text-align: center;
+    padding: 12px 15px;
+  }
+}

@@ -71,7 +71,7 @@ const teamMembers = [
   {
     id: 5,
     name: 'Narsi Kumawat',
-    position: 'Lab oratory Manager',
+    position: 'Laboratory Manager',
     experience: '2+ Years Experience',
     speciality: 'Construction Management',
     image: '/placeholder.svg?height=300&width=300',

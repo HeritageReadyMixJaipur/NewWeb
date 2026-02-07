@@ -1,7 +1,106 @@
-.whatsappButton {
+.whatsappContainer {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 1000;
+}
+
+.optionsMenu {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menuHeader {
+  background: #25d366;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.optionButton {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.optionButton:hover {
+  background: #f8f9fa;
+}
+
+.optionButton:last-child {
+  border-bottom: none;
+}
+
+.optionIcon {
+  width: 40px;
+  height: 40px;
+  background: #e67e22;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.optionName {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.optionNumber {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.whatsappButton {
   width: 60px;
   height: 60px;
   background: #25d366;
@@ -14,7 +113,6 @@
   justify-content: center;
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
-  z-index: 1000;
   animation: pulse 2s infinite;
 }
 
@@ -22,6 +120,12 @@
   background: #128c7e;
   transform: scale(1.1);
   box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsappButton.active {
+  background: #128c7e;
+  transform: rotate(90deg);
+  animation: none;
 }
 
 @keyframes pulse {
@@ -36,11 +140,59 @@
   }
 }
 
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
+  .whatsappContainer {
+    bottom: 15px;
+    right: 15px;
+  }
+
   .whatsappButton {
     width: 50px;
     height: 50px;
-    bottom: 15px;
-    right: 15px;
+  }
+
+  .optionsMenu {
+    bottom: 70px;
+    min-width: 260px;
+  }
+
+  .menuHeader {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .optionButton {
+    padding: 0.75rem;
+  }
+
+  .optionIcon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .optionName {
+    font-size: 0.85rem;
+  }
+
+  .optionNumber {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .optionsMenu {
+    right: -10px;
+    min-width: 240px;
   }
 }
